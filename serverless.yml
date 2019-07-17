@@ -1,0 +1,23 @@
+service: hello-sls
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-west-1
+  stage: dev
+
+functions:
+  gameFunction:
+    handler: game.players
+    events:
+      - http:
+          path: players/list
+          method: get
+          cors: true
+
+  loggerfunction:
+    handler: handler.logger
+    events:
+      - http:
+          path: messages
+          method: get
